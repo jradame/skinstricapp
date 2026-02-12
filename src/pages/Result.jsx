@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // ========================================
 // IMAGE ASSETS
@@ -340,12 +341,12 @@ const Result = () => {
           <header className="flex flex-row h-[64px] min-h-[64px] max-h-[64px] w-full justify-between items-center py-5 px-4 sm:px-6 mb-3 mt-2 relative z-[1000]">
             <div className="flex flex-col justify-center">
               <div className="flex flex-row items-center scale-75 sm:scale-100">
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors px-2 sm:px-4 py-2 font-normal text-xs sm:text-sm leading-[16px]"
                 >
                   SKINSTRIC
-                </a>
+                </Link>
                 <p className="text-[#1a1b1c83] font-normal text-xs sm:text-sm ml-1 sm:ml-1.5 mr-1 sm:mr-1.5">
                   [ INTRO ]
                 </p>
@@ -596,7 +597,7 @@ const Result = () => {
             {/* ==================== BACK BUTTON - RESPONSIVE ==================== */}
             <div className="pt-4 md:pt-0 pb-8 bg-white sticky md:static bottom-30.5 mb-0 md:mb-0">
               <div className="absolute bottom-6 sm:bottom-8 w-full flex justify-between px-4 sm:px-6 md:px-9 lg:px-13">
-                <a className="relative" aria-label="Back" href="/introduce">
+                <Link className="relative" aria-label="Back" to="/introduce">
                   <div>
                     <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-[#1A1B1C] rotate-45 scale-[1] sm:hidden">
                       <span className="rotate-[-45deg] text-[10px] font-semibold sm:hidden">BACK</span>
@@ -607,7 +608,7 @@ const Result = () => {
                       <span className="text-sm font-semibold hidden sm:block ml-6">BACK</span>
                     </div>
                   </div>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
