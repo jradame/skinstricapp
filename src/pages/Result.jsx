@@ -289,7 +289,7 @@ export default function Result() {
 
       {/* ANALYSIS LOADING SCREEN */}
       {loading && (
-        <div className="fixed inset-0 w-screen h-screen bg-white z-9999 flex flex-col justify-center items-center">
+        <div className="fixed inset-0 w-screen h-screen bg-white z-[9999] flex flex-col justify-center items-center">
           <div className="relative flex items-center justify-center scale-50 sm:scale-75 md:scale-100">
             <img
               src={largediamond}
@@ -362,7 +362,7 @@ export default function Result() {
 
       {/* MAIN CONTENT */}
       <div className="min-h-[92vh] flex flex-col bg-white relative md:pt-[64px] justify-center px-4 sm:px-6">
-        <div className="flex flex-col items-center gap-12 sm:gap-16 md:gap-20 lg:hidden relative z-20 mt-12">
+        <div className="flex flex-col items-center gap-12 sm:gap-16 md:gap-20 relative z-20 mt-12">
           {/* CAMERA OPTION */}
           <div className="relative flex flex-col items-center">
             <DiamondBackground />
@@ -410,9 +410,9 @@ export default function Result() {
           onChange={handleChange}
         />
 
-        {/* PREVIEW (MOBILE) */}
+        {/* PREVIEW */}
         {preview && (
-          <div className="lg:hidden mt-8 flex flex-col items-center">
+          <div className="mt-8 flex flex-col items-center">
             <h1 className="text-xs sm:text-sm font-normal mb-2">Preview</h1>
             <div className="w-24 h-24 sm:w-32 sm:h-32 border border-gray-300 overflow-hidden bg-gray-50">
               <img
