@@ -22,7 +22,7 @@ export default function App() {
           <Route path="/demographics" element={<Demographics />} />
           <Route path="/summary" element={<Demographics />} />
 
-          {/* Better than rendering Hero on unknown routes */}
+          {/* Unknown routes */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

@@ -16,9 +16,7 @@ export default function Analysis() {
   }, []);
 
   useEffect(() => {
-    const t = setTimeout(() => {
-      navigate("/select", { replace: true });
-    }, 8000);
+    const t = setTimeout(() => navigate("/select", { replace: true }), 8000);
     return () => clearTimeout(t);
   }, [navigate]);
 
@@ -40,7 +38,9 @@ export default function Analysis() {
               SKINSTRIC
             </Link>
             <img className="w-1 h-4" src="/Image/left-bracket.svg" alt="" />
-            <p className="text-[#1a1b1c83] text-opacity-70 font-semibold text-sm ml-1.5 mr-1.5">INTRO</p>
+            <p className="text-[#1a1b1c83] text-opacity-70 font-semibold text-sm ml-1.5 mr-1.5">
+              INTRO
+            </p>
             <img className="w-1 h-4" src="/Image/right-bracket.svg" alt="" />
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function Analysis() {
           </p>
         </div>
 
-        <div className="flex-[0.4] md:flex-1 flex flex-col items-center xl:justify-center relative mb-0 md:mb-30">
+        <div className="flex-[0.4] md:flex-1 flex flex-col items-center xl:justify-center relative">
           <div className="text-center">
             <h2 className="text-2xl font-bold mb-4">Demographics Analysis Complete</h2>
 
@@ -67,9 +67,7 @@ export default function Analysis() {
                     <strong>Race:</strong>
                     <div className="text-sm">
                       {Object.entries(apiData.race).map(([k, v]) => (
-                        <div key={k}>
-                          {k}: {(Number(v) * 100).toFixed(1)}%
-                        </div>
+                        <div key={k}>{k}: {(Number(v) * 100).toFixed(1)}%</div>
                       ))}
                     </div>
                   </div>
@@ -80,9 +78,7 @@ export default function Analysis() {
                     <strong>Age:</strong>
                     <div className="text-sm">
                       {Object.entries(apiData.age).map(([k, v]) => (
-                        <div key={k}>
-                          {k}: {(Number(v) * 100).toFixed(1)}%
-                        </div>
+                        <div key={k}>{k}: {(Number(v) * 100).toFixed(1)}%</div>
                       ))}
                     </div>
                   </div>
@@ -93,9 +89,7 @@ export default function Analysis() {
                     <strong>Gender:</strong>
                     <div className="text-sm">
                       {Object.entries(apiData.gender).map(([k, v]) => (
-                        <div key={k}>
-                          {k}: {(Number(v) * 100).toFixed(1)}%
-                        </div>
+                        <div key={k}>{k}: {(Number(v) * 100).toFixed(1)}%</div>
                       ))}
                     </div>
                   </div>
@@ -103,7 +97,7 @@ export default function Analysis() {
               </div>
             ) : (
               <div className="bg-yellow-50 border border-yellow-200 text-yellow-900 p-4 rounded-lg max-w-md mx-auto">
-                No saved analysis found (refresh/direct load). Redirecting…
+                No saved analysis found. Redirecting…
               </div>
             )}
 

@@ -1,34 +1,39 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Introduce = () => {
-  const [step, setStep] = useState(1)
-  const [name, setName] = useState("")
-  const [city, setCity] = useState("")
+  const [step, setStep] = useState(1);
+  const [name, setName] = useState("");
+  const [city, setCity] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
     if (step === 1 && name.trim()) {
-      setStep(2)
-    } else if (step === 2 && city.trim()) {
-      localStorage.setItem("userName", name.trim())
-      localStorage.setItem("userCity", city.trim())
-      setStep(3)
-      console.log("Saved to localStorage:", name.trim(), city.trim())
+      setStep(2);
+      return;
     }
-  }
+
+    if (step === 2 && city.trim()) {
+      localStorage.setItem("userName", name.trim());
+      localStorage.setItem("userCity", city.trim());
+      setStep(3);
+      return;
+    }
+  };
 
   return (
     <main className="relative min-h-screen bg-white text-[#1A1B1C] overflow-hidden">
-      {/* Custom Header for Introduce Page */}
       <header className="flex flex-row h-[64px] w-full justify-between items-start py-3 px-4 md:px-9 fixed top-0 left-0 right-0 z-[1000]">
         <div className="flex flex-col items-start">
           <div className="flex flex-row items-center scale-[0.6] md:scale-75 origin-left">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors h-9 px-4 py-2 font-semibold text-sm mr-2 leading-[16px]"
             >
               SKINSTRIC
-            </a>
+            </Link>
             <p className="text-[#1a1b1c83] font-semibold text-sm ml-1.5 mr-1.5">
               [ INTRO ]
             </p>
@@ -43,7 +48,6 @@ const Introduce = () => {
         </button>
       </header>
 
-      {/* Center Content */}
       <div className="relative flex flex-col items-center justify-center h-screen">
         {step < 3 && (
           <p className="text-[10px] md:text-sm text-gray-400 tracking-wider uppercase mb-1">
@@ -86,11 +90,19 @@ const Introduce = () => {
             <p className="text-xl md:text-2xl font-normal text-[#1A1B1C] tracking-wide">
               Thank you!
             </p>
-            <p className="text-base md:text-lg text-gray-600">Proceed to the next step</p>
+            <p className="text-base md:text-lg text-gray-600">
+              Proceed to the next step
+            </p>
+
+            <button
+              onClick={() => navigate("/result")}
+              className="mt-2 px-4 py-2 border border-black text-sm font-semibold hover:bg-black hover:text-white transition-colors"
+            >
+              PROCEED
+            </button>
           </div>
         )}
 
-        {/* Spinning Diamonds */}
         <div className="absolute inset-0 flex items-center justify-center z-0">
           <img
             src="/Image/diamond-large.svg"
@@ -110,9 +122,8 @@ const Introduce = () => {
         </div>
       </div>
 
-      {/* Bottom Navigation */}
       <div className="absolute bottom-6 md:bottom-8 w-full flex justify-between px-4 md:px-9 lg:px-13">
-        <a href="/" className="inset-0" aria-label="Back">
+        <Link to="/" className="inset-0" aria-label="Back">
           <div>
             <div className="relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-[#1A1B1C] rotate-45 scale-[1] sm:hidden">
               <span className="rotate-[-45deg] text-[10px] font-semibold sm:hidden">
@@ -129,32 +140,20 @@ const Introduce = () => {
               </span>
             </div>
           </div>
-        </a>
+        </Link>
 
         {step === 3 && (
-          <a
-            href="/result"
-            className="inline-block transform opacity-0 animate-proceedSlideIn"
-          >
+          <Link to="/result" className="inline-block">
             <div className="relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-[#1A1B1C] rotate-45 sm:hidden">
               <span className="rotate-[-45deg] text-[10px] font-semibold">
                 NEXT
               </span>
             </div>
-            <div className="group hidden sm:flex flex-row relative justify-center items-center">
-              <span className="text-sm font-semibold hidden sm:block mr-5">
-                PROCEED
-              </span>
-              <div className="w-12 h-12 hidden sm:flex justify-center border border-[#1A1B1C] rotate-45 scale-[0.85] group-hover:scale-[0.92] ease duration-300" />
-              <span className="absolute right-[15px] bottom-[13px] scale-[0.9] hidden sm:block group-hover:scale-[0.92] ease duration-300">
-                ▶
-              </span>
-            </div>
-          </a>
+          </Link>
         )}
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default Introduce
+export default Introduce;
