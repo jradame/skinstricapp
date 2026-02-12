@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 // ========================================
 // DEMOGRAPHICS COMPONENT
@@ -8,72 +8,74 @@ const Demographics = () => {
   // ========================================
   // STATE MANAGEMENT
   // ========================================
-  const [analysisData, setAnalysisData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [selectedCategory, setSelectedCategory] = useState('race')
-  const [selectedItem, setSelectedItem] = useState(null)
-  const navigate = useNavigate()
+  const [analysisData, setAnalysisData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("race");
+  const [selectedItem, setSelectedItem] = useState(null);
+  const navigate = useNavigate();
 
   // ========================================
   // LOAD ANALYSIS DATA
   // ========================================
   useEffect(() => {
-    const storedData = localStorage.getItem("skinstricApiResponse")
+    const storedData = localStorage.getItem("skinstricApiResponse");
     if (storedData) {
-      setAnalysisData(JSON.parse(storedData))
-      setLoading(false)
+      setAnalysisData(JSON.parse(storedData));
+      setLoading(false);
     } else {
-      navigate("/result")
+      navigate("/result");
     }
-  }, [navigate])
+  }, [navigate]);
 
   // ========================================
   // SET DEFAULT SELECTED ITEM
   // ========================================
   useEffect(() => {
     if (analysisData) {
-      if (selectedCategory === 'race') {
+      if (selectedCategory === "race") {
         setSelectedItem({
-          name: 'Latino hispanic',
+          name: "Latino hispanic",
           percentage: 72,
-          key: 'latino_hispanic',
-          category: 'race'
-        })
-      } else if (selectedCategory === 'age') {
+          key: "latinohispanic",
+          category: "race",
+        });
+      } else if (selectedCategory === "age") {
         setSelectedItem({
-          name: '3-9',
+          name: "3-9",
           percentage: 86,
-          key: '3_9',
-          category: 'age'
-        })
-      } else if (selectedCategory === 'sex') {
+          key: "39",
+          category: "age",
+        });
+      } else if (selectedCategory === "sex") {
         setSelectedItem({
-          name: 'Female',
+          name: "Female",
           percentage: 52,
-          key: 'female',
-          category: 'sex'
-        })
+          key: "female",
+          category: "sex",
+        });
       }
     }
-  }, [analysisData, selectedCategory])
+  }, [analysisData, selectedCategory]);
 
   // ========================================
   // EVENT HANDLERS
   // ========================================
-  const handleBack = () => navigate("/select")
-  
+  const handleBack = () => {
+    navigate("/select");
+  };
+
   const handleItemClick = (itemKey, itemName, percentage, category) => {
     setSelectedItem({
       name: itemName,
       percentage: percentage,
       key: itemKey,
-      category: category
-    })
-  }
-  
+      category: category,
+    });
+  };
+
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category)
-  }
+    setSelectedCategory(category);
+  };
 
   // ========================================
   // LOADING STATE
@@ -83,7 +85,7 @@ const Demographics = () => {
       <div className="flex justify-center items-center h-screen w-full bg-white">
         <div className="text-lg sm:text-xl md:text-2xl">Loading demographics...</div>
       </div>
-    )
+    );
   }
 
   // ========================================
@@ -94,65 +96,66 @@ const Demographics = () => {
       <div className="flex justify-center items-center h-screen w-full bg-white">
         <div className="text-lg sm:text-xl md:text-2xl">No analysis data found</div>
       </div>
-    )
+    );
   }
 
   // ========================================
   // DATA ARRAYS
   // ========================================
   const raceList = [
-    { key: 'latino_hispanic', name: 'Latino hispanic', percentage: 72 },
-    { key: 'white', name: 'White', percentage: 11 },
-    { key: 'east_asian', name: 'East asian', percentage: 5 },
-    { key: 'middle_eastern', name: 'Middle eastern', percentage: 4 },
-    { key: 'southeast_asian', name: 'Southeast asian', percentage: 3 },
-    { key: 'black', name: 'Black', percentage: 2 },
-    { key: 'south_asian', name: 'South asian', percentage: 0 }
-  ].map(race => ({
+    { key: "latinohispanic", name: "Latino hispanic", percentage: 72 },
+    { key: "white", name: "White", percentage: 11 },
+    { key: "eastasian", name: "East asian", percentage: 5 },
+    { key: "middleeastern", name: "Middle eastern", percentage: 4 },
+    { key: "southeastasian", name: "Southeast asian", percentage: 3 },
+    { key: "black", name: "Black", percentage: 2 },
+    { key: "southasian", name: "South asian", percentage: 0 },
+  ].map((race) => ({
     ...race,
-    isSelected: selectedItem?.key === race.key && selectedCategory === 'race'
-  }))
+    isSelected: selectedItem?.key === race.key && selectedCategory === "race",
+  }));
 
   const ageList = [
-    { key: '3_9', name: '3-9', percentage: 86 },
-    { key: '10_19', name: '10-19', percentage: 4 },
-    { key: '30_39', name: '30-39', percentage: 4 },
-    { key: '50_59', name: '50-59', percentage: 3 },
-    { key: '0_2', name: '0-2', percentage: 0 },
-    { key: '20_29', name: '20-29', percentage: 0 },
-    { key: '40_49', name: '40-49', percentage: 0 },
-    { key: '60_69', name: '60-69', percentage: 0 },
-    { key: '70_plus', name: '70+', percentage: 0 }
-  ].map(age => ({
+    { key: "39", name: "3-9", percentage: 86 },
+    { key: "1019", name: "10-19", percentage: 4 },
+    { key: "3039", name: "30-39", percentage: 4 },
+    { key: "5059", name: "50-59", percentage: 3 },
+    { key: "02", name: "0-2", percentage: 0 },
+    { key: "2029", name: "20-29", percentage: 0 },
+    { key: "4049", name: "40-49", percentage: 0 },
+    { key: "6069", name: "60-69", percentage: 0 },
+    { key: "70plus", name: "70+", percentage: 0 },
+  ].map((age) => ({
     ...age,
-    isSelected: selectedItem?.key === age.key && selectedCategory === 'age'
-  }))
+    isSelected: selectedItem?.key === age.key && selectedCategory === "age",
+  }));
 
   const sexList = [
-    { key: 'female', name: 'FEMALE', percentage: 52 },
-    { key: 'male', name: 'MALE', percentage: 47 }
-  ].map(sex => ({
+    { key: "female", name: "FEMALE", percentage: 52 },
+    { key: "male", name: "MALE", percentage: 47 },
+  ].map((sex) => ({
     ...sex,
-    isSelected: selectedItem?.key === sex.key && selectedCategory === 'sex'
-  }))
+    isSelected: selectedItem?.key === sex.key && selectedCategory === "sex",
+  }));
 
   // ========================================
   // RENDER
   // ========================================
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      
       {/* ==================== HEADER - RESPONSIVE ==================== */}
       <header className="flex flex-row h-14 sm:h-16 w-full justify-between items-center py-3 mb-4 sm:mb-6 px-4 sm:px-6 md:px-8">
         <div className="flex flex-row items-center scale-[0.7] sm:scale-[0.8] md:scale-100 origin-left">
-          <span className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold text-sm sm:text-base text-[#1A1B1C]">
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold text-sm sm:text-base text-[#1A1B1C]"
+          >
             SKINSTRIC
-          </span>
+          </Link>
           <span className="text-[#1a1b1c83] font-semibold text-xs sm:text-sm ml-1.5">
-            [ INTRO ]
+            INTRO
           </span>
         </div>
-        
         <button className="inline-flex items-center justify-center gap-1 whitespace-nowrap font-semibold text-[10px] sm:text-xs bg-[#1A1B1C] text-white px-2 sm:px-3 py-2 scale-[0.8] sm:scale-100">
           ENTER CODE
         </button>
@@ -172,34 +175,39 @@ const Demographics = () => {
       </div>
 
       {/* ==================== MAIN LAYOUT - RESPONSIVE ==================== */}
-      {/* Mobile: Stacked */}
+      {/* Mobile Stacked */}
       <div className="lg:hidden px-4 space-y-6">
-        
         {/* Category Selector - Mobile */}
         <div className="flex gap-4 justify-center">
-          <img 
-            src="/Image/race1.svg" 
-            alt="Race" 
+          <img
+            src="/Image/race1.svg"
+            alt="Race"
             className={`cursor-pointer hover:opacity-80 w-20 sm:w-24 transition-all duration-200 ${
-              selectedCategory === 'race' ? 'ring-4 ring-black ring-opacity-50 scale-105' : ''
+              selectedCategory === "race"
+                ? "ring-4 ring-black ring-opacity-50 scale-105"
+                : ""
             }`}
-            onClick={() => handleCategoryClick('race')}
+            onClick={() => handleCategoryClick("race")}
           />
-          <img 
-            src="/Image/age1.svg" 
-            alt="Age" 
+          <img
+            src="/Image/age1.svg"
+            alt="Age"
             className={`cursor-pointer hover:opacity-80 w-20 sm:w-24 transition-all duration-200 ${
-              selectedCategory === 'age' ? 'ring-4 ring-black ring-opacity-50 scale-105' : ''
+              selectedCategory === "age"
+                ? "ring-4 ring-black ring-opacity-50 scale-105"
+                : ""
             }`}
-            onClick={() => handleCategoryClick('age')}
+            onClick={() => handleCategoryClick("age")}
           />
-          <img 
-            src="/Image/sex1.svg" 
-            alt="Sex" 
+          <img
+            src="/Image/sex1.svg"
+            alt="Sex"
             className={`cursor-pointer hover:opacity-80 w-20 sm:w-24 transition-all duration-200 ${
-              selectedCategory === 'sex' ? 'ring-4 ring-black ring-opacity-50 scale-105' : ''
+              selectedCategory === "sex"
+                ? "ring-4 ring-black ring-opacity-50 scale-105"
+                : ""
             }`}
-            onClick={() => handleCategoryClick('sex')}
+            onClick={() => handleCategoryClick("sex")}
           />
         </div>
 
@@ -208,18 +216,29 @@ const Demographics = () => {
           <div className="text-2xl sm:text-3xl font-medium capitalize mb-4 text-center">
             {selectedItem ? selectedItem.name : "Latino hispanic"}
           </div>
-          
           <div className="relative w-48 h-48 sm:w-64 sm:h-64 mx-auto">
-            <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" stroke="#D1D5DB" strokeWidth="6" fill="none" />
-              <circle 
-                cx="50" 
-                cy="50" 
-                r="45" 
-                stroke="#111" 
-                strokeWidth="6" 
+            <svg
+              className="w-full h-full transform -rotate-90"
+              viewBox="0 0 100 100"
+            >
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                stroke="#D1D5DB"
+                strokeWidth="6"
                 fill="none"
-                strokeDasharray={`${selectedItem ? selectedItem.percentage * 2.827 : 72 * 2.827} 282.7`}
+              />
+              <circle
+                cx="50"
+                cy="50"
+                r="45"
+                stroke="#111"
+                strokeWidth="6"
+                fill="none"
+                strokeDasharray={`${
+                  selectedItem ? selectedItem.percentage * 2.827 : 72 * 2.827
+                } 282.7`}
                 strokeLinecap="round"
               />
             </svg>
@@ -239,118 +258,149 @@ const Demographics = () => {
             </h3>
             <h4 className="text-base sm:text-lg font-semibold">A.I. CONFIDENCE</h4>
           </div>
-          
           <div className="space-y-2 sm:space-y-3">
-            {selectedCategory === 'race' && raceList.map((race) => (
-              <div 
-                key={race.key} 
-                className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
-                  race.isSelected ? 'bg-black text-white' : ''
-                }`}
-                onClick={() => handleItemClick(race.key, race.name, race.percentage, 'race')}
-              >
-                <div className="flex items-center">
-                  <div className={`w-3 h-3 mr-3 ${
-                    race.isSelected ? 'bg-white' : 'border border-gray-300'
-                  }`}></div>
-                  <span className={`text-xs sm:text-sm ${
-                    race.isSelected ? 'font-semibold text-white' : 'text-gray-700'
-                  }`}>
-                    {race.name}
+            {selectedCategory === "race" &&
+              raceList.map((race) => (
+                <div
+                  key={race.key}
+                  className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
+                    race.isSelected ? "bg-black text-white" : ""
+                  }`}
+                  onClick={() =>
+                    handleItemClick(race.key, race.name, race.percentage, "race")
+                  }
+                >
+                  <div className="flex items-center">
+                    <div
+                      className={`w-3 h-3 mr-3 ${
+                        race.isSelected ? "bg-white" : "border border-gray-300"
+                      }`}
+                    ></div>
+                    <span
+                      className={`text-xs sm:text-sm ${
+                        race.isSelected ? "font-semibold text-white" : "text-gray-700"
+                      }`}
+                    >
+                      {race.name}
+                    </span>
+                  </div>
+                  <span
+                    className={`text-xs sm:text-sm font-semibold ${
+                      race.isSelected ? "text-white" : "text-gray-700"
+                    }`}
+                  >
+                    {race.percentage}%
                   </span>
                 </div>
-                <span className={`text-xs sm:text-sm font-semibold ${
-                  race.isSelected ? 'text-white' : 'text-gray-700'
-                }`}>
-                  {race.percentage}%
-                </span>
-              </div>
-            ))}
+              ))}
 
-            {selectedCategory === 'age' && ageList.map((age) => (
-              <div 
-                key={age.key} 
-                className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
-                  age.isSelected ? 'bg-black text-white' : ''
-                }`}
-                onClick={() => handleItemClick(age.key, age.name, age.percentage, 'age')}
-              >
-                <div className="flex items-center">
-                  <div className={`w-3 h-3 mr-3 ${
-                    age.isSelected ? 'bg-white' : 'border border-gray-300'
-                  }`}></div>
-                  <span className={`text-xs sm:text-sm ${
-                    age.isSelected ? 'font-semibold text-white' : 'text-gray-700'
-                  }`}>
-                    {age.name}
+            {selectedCategory === "age" &&
+              ageList.map((age) => (
+                <div
+                  key={age.key}
+                  className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
+                    age.isSelected ? "bg-black text-white" : ""
+                  }`}
+                  onClick={() =>
+                    handleItemClick(age.key, age.name, age.percentage, "age")
+                  }
+                >
+                  <div className="flex items-center">
+                    <div
+                      className={`w-3 h-3 mr-3 ${
+                        age.isSelected ? "bg-white" : "border border-gray-300"
+                      }`}
+                    ></div>
+                    <span
+                      className={`text-xs sm:text-sm ${
+                        age.isSelected ? "font-semibold text-white" : "text-gray-700"
+                      }`}
+                    >
+                      {age.name}
+                    </span>
+                  </div>
+                  <span
+                    className={`text-xs sm:text-sm font-semibold ${
+                      age.isSelected ? "text-white" : "text-gray-700"
+                    }`}
+                  >
+                    {age.percentage}%
                   </span>
                 </div>
-                <span className={`text-xs sm:text-sm font-semibold ${
-                  age.isSelected ? 'text-white' : 'text-gray-700'
-                }`}>
-                  {age.percentage}%
-                </span>
-              </div>
-            ))}
+              ))}
 
-            {selectedCategory === 'sex' && sexList.map((sex) => (
-              <div 
-                key={sex.key} 
-                className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
-                  sex.isSelected ? 'bg-black text-white' : ''
-                }`}
-                onClick={() => handleItemClick(sex.key, sex.name, sex.percentage, 'sex')}
-              >
-                <div className="flex items-center">
-                  <div className={`w-3 h-3 mr-3 ${
-                    sex.isSelected ? 'bg-white' : 'border border-gray-300'
-                  }`}></div>
-                  <span className={`text-xs sm:text-sm ${
-                    sex.isSelected ? 'font-semibold text-white' : 'text-gray-700'
-                  }`}>
-                    {sex.name}
+            {selectedCategory === "sex" &&
+              sexList.map((sex) => (
+                <div
+                  key={sex.key}
+                  className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
+                    sex.isSelected ? "bg-black text-white" : ""
+                  }`}
+                  onClick={() =>
+                    handleItemClick(sex.key, sex.name, sex.percentage, "sex")
+                  }
+                >
+                  <div className="flex items-center">
+                    <div
+                      className={`w-3 h-3 mr-3 ${
+                        sex.isSelected ? "bg-white" : "border border-gray-300"
+                      }`}
+                    ></div>
+                    <span
+                      className={`text-xs sm:text-sm ${
+                        sex.isSelected ? "font-semibold text-white" : "text-gray-700"
+                      }`}
+                    >
+                      {sex.name}
+                    </span>
+                  </div>
+                  <span
+                    className={`text-xs sm:text-sm font-semibold ${
+                      sex.isSelected ? "text-white" : "text-gray-700"
+                    }`}
+                  >
+                    {sex.percentage}%
                   </span>
                 </div>
-                <span className={`text-xs sm:text-sm font-semibold ${
-                  sex.isSelected ? 'text-white' : 'text-gray-700'
-                }`}>
-                  {sex.percentage}%
-                </span>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
 
-      {/* Desktop: Grid Layout */}
+      {/* Desktop Grid Layout */}
       <div className="hidden lg:block w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
         <div className="grid grid-cols-12 items-stretch">
-          
           {/* LEFT SIDEBAR - Desktop */}
           <div className="col-span-2 flex flex-col gap-6 p-6">
-            <img 
-              src="/Image/race1.svg" 
-              alt="Race" 
+            <img
+              src="/Image/race1.svg"
+              alt="Race"
               className={`cursor-pointer hover:opacity-80 w-full transition-all duration-200 ${
-                selectedCategory === 'race' ? 'ring-4 ring-black ring-opacity-50 scale-105' : ''
+                selectedCategory === "race"
+                  ? "ring-4 ring-black ring-opacity-50 scale-105"
+                  : ""
               }`}
-              onClick={() => handleCategoryClick('race')}
+              onClick={() => handleCategoryClick("race")}
             />
-            <img 
-              src="/Image/age1.svg" 
-              alt="Age" 
+            <img
+              src="/Image/age1.svg"
+              alt="Age"
               className={`cursor-pointer hover:opacity-80 w-full transition-all duration-200 ${
-                selectedCategory === 'age' ? 'ring-4 ring-black ring-opacity-50 scale-105' : ''
+                selectedCategory === "age"
+                  ? "ring-4 ring-black ring-opacity-50 scale-105"
+                  : ""
               }`}
-              onClick={() => handleCategoryClick('age')}
+              onClick={() => handleCategoryClick("age")}
             />
-            <img 
-              src="/Image/sex1.svg" 
-              alt="Sex" 
+            <img
+              src="/Image/sex1.svg"
+              alt="Sex"
               className={`cursor-pointer hover:opacity-80 w-full transition-all duration-200 ${
-                selectedCategory === 'sex' ? 'ring-4 ring-black ring-opacity-50 scale-105' : ''
+                selectedCategory === "sex"
+                  ? "ring-4 ring-black ring-opacity-50 scale-105"
+                  : ""
               }`}
-              onClick={() => handleCategoryClick('sex')}
+              onClick={() => handleCategoryClick("sex")}
             />
           </div>
 
@@ -360,18 +410,29 @@ const Demographics = () => {
               <div className="text-5xl font-medium capitalize">
                 {selectedItem ? selectedItem.name : "Latino hispanic"}
               </div>
-              
               <div className="relative w-96 h-96 flex-shrink-0">
-                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="45" stroke="#D1D5DB" strokeWidth="6" fill="none" />
-                  <circle 
-                    cx="50" 
-                    cy="50" 
-                    r="45" 
-                    stroke="#111" 
-                    strokeWidth="6" 
+                <svg
+                  className="w-full h-full transform -rotate-90"
+                  viewBox="0 0 100 100"
+                >
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    stroke="#D1D5DB"
+                    strokeWidth="6"
                     fill="none"
-                    strokeDasharray={`${selectedItem ? selectedItem.percentage * 2.827 : 72 * 2.827} 282.7`}
+                  />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="45"
+                    stroke="#111"
+                    strokeWidth="6"
+                    fill="none"
+                    strokeDasharray={`${
+                      selectedItem ? selectedItem.percentage * 2.827 : 72 * 2.827
+                    } 282.7`}
                     strokeLinecap="round"
                   />
                 </svg>
@@ -393,85 +454,117 @@ const Demographics = () => {
                 </h3>
                 <h4 className="text-lg font-semibold">A.I. CONFIDENCE</h4>
               </div>
-              
               <div className="space-y-3">
-                {selectedCategory === 'race' && raceList.map((race) => (
-                  <div 
-                    key={race.key} 
-                    className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
-                      race.isSelected ? 'bg-black text-white' : ''
-                    }`}
-                    onClick={() => handleItemClick(race.key, race.name, race.percentage, 'race')}
-                  >
-                    <div className="flex items-center">
-                      <div className={`w-3 h-3 mr-3 ${
-                        race.isSelected ? 'bg-white' : 'border border-gray-300'
-                      }`}></div>
-                      <span className={`text-sm ${
-                        race.isSelected ? 'font-semibold text-white' : 'text-gray-700'
-                      }`}>
-                        {race.name}
+                {selectedCategory === "race" &&
+                  raceList.map((race) => (
+                    <div
+                      key={race.key}
+                      className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
+                        race.isSelected ? "bg-black text-white" : ""
+                      }`}
+                      onClick={() =>
+                        handleItemClick(race.key, race.name, race.percentage, "race")
+                      }
+                    >
+                      <div className="flex items-center">
+                        <div
+                          className={`w-3 h-3 mr-3 ${
+                            race.isSelected ? "bg-white" : "border border-gray-300"
+                          }`}
+                        ></div>
+                        <span
+                          className={`text-sm ${
+                            race.isSelected
+                              ? "font-semibold text-white"
+                              : "text-gray-700"
+                          }`}
+                        >
+                          {race.name}
+                        </span>
+                      </div>
+                      <span
+                        className={`text-sm font-semibold ${
+                          race.isSelected ? "text-white" : "text-gray-700"
+                        }`}
+                      >
+                        {race.percentage}%
                       </span>
                     </div>
-                    <span className={`text-sm font-semibold ${
-                      race.isSelected ? 'text-white' : 'text-gray-700'
-                    }`}>
-                      {race.percentage}%
-                    </span>
-                  </div>
-                ))}
+                  ))}
 
-                {selectedCategory === 'age' && ageList.map((age) => (
-                  <div 
-                    key={age.key} 
-                    className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
-                      age.isSelected ? 'bg-black text-white' : ''
-                    }`}
-                    onClick={() => handleItemClick(age.key, age.name, age.percentage, 'age')}
-                  >
-                    <div className="flex items-center">
-                      <div className={`w-3 h-3 mr-3 ${
-                        age.isSelected ? 'bg-white' : 'border border-gray-300'
-                      }`}></div>
-                      <span className={`text-sm ${
-                        age.isSelected ? 'font-semibold text-white' : 'text-gray-700'
-                      }`}>
-                        {age.name}
+                {selectedCategory === "age" &&
+                  ageList.map((age) => (
+                    <div
+                      key={age.key}
+                      className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
+                        age.isSelected ? "bg-black text-white" : ""
+                      }`}
+                      onClick={() =>
+                        handleItemClick(age.key, age.name, age.percentage, "age")
+                      }
+                    >
+                      <div className="flex items-center">
+                        <div
+                          className={`w-3 h-3 mr-3 ${
+                            age.isSelected ? "bg-white" : "border border-gray-300"
+                          }`}
+                        ></div>
+                        <span
+                          className={`text-sm ${
+                            age.isSelected
+                              ? "font-semibold text-white"
+                              : "text-gray-700"
+                          }`}
+                        >
+                          {age.name}
+                        </span>
+                      </div>
+                      <span
+                        className={`text-sm font-semibold ${
+                          age.isSelected ? "text-white" : "text-gray-700"
+                        }`}
+                      >
+                        {age.percentage}%
                       </span>
                     </div>
-                    <span className={`text-sm font-semibold ${
-                      age.isSelected ? 'text-white' : 'text-gray-700'
-                    }`}>
-                      {age.percentage}%
-                    </span>
-                  </div>
-                ))}
+                  ))}
 
-                {selectedCategory === 'sex' && sexList.map((sex) => (
-                  <div 
-                    key={sex.key} 
-                    className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
-                      sex.isSelected ? 'bg-black text-white' : ''
-                    }`}
-                    onClick={() => handleItemClick(sex.key, sex.name, sex.percentage, 'sex')}
-                  >
-                    <div className="flex items-center">
-                      <div className={`w-3 h-3 mr-3 ${
-                        sex.isSelected ? 'bg-white' : 'border border-gray-300'
-                      }`}></div>
-                      <span className={`text-sm ${
-                        sex.isSelected ? 'font-semibold text-white' : 'text-gray-700'
-                      }`}>
-                        {sex.name}
+                {selectedCategory === "sex" &&
+                  sexList.map((sex) => (
+                    <div
+                      key={sex.key}
+                      className={`flex justify-between items-center py-2 px-3 cursor-pointer hover:bg-gray-50 transition-colors ${
+                        sex.isSelected ? "bg-black text-white" : ""
+                      }`}
+                      onClick={() =>
+                        handleItemClick(sex.key, sex.name, sex.percentage, "sex")
+                      }
+                    >
+                      <div className="flex items-center">
+                        <div
+                          className={`w-3 h-3 mr-3 ${
+                            sex.isSelected ? "bg-white" : "border border-gray-300"
+                          }`}
+                        ></div>
+                        <span
+                          className={`text-sm ${
+                            sex.isSelected
+                              ? "font-semibold text-white"
+                              : "text-gray-700"
+                          }`}
+                        >
+                          {sex.name}
+                        </span>
+                      </div>
+                      <span
+                        className={`text-sm font-semibold ${
+                          sex.isSelected ? "text-white" : "text-gray-700"
+                        }`}
+                      >
+                        {sex.percentage}%
                       </span>
                     </div>
-                    <span className={`text-sm font-semibold ${
-                      sex.isSelected ? 'text-white' : 'text-gray-700'
-                    }`}>
-                      {sex.percentage}%
-                    </span>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
           </div>
@@ -481,16 +574,19 @@ const Demographics = () => {
       {/* ==================== BOTTOM NAVIGATION - RESPONSIVE ==================== */}
       <div className="pt-6 sm:pt-8 md:pt-[37px] pb-6 sm:pb-8 bg-white mt-8 relative px-4 sm:px-6 md:px-8">
         <div className="flex justify-between items-center w-full">
-          
           {/* BACK button */}
           <button onClick={handleBack}>
             <div>
               <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-[#1A1B1C] rotate-45 md:hidden">
-                <span className="rotate-[-45deg] text-[10px] sm:text-xs font-semibold">BACK</span>
+                <span className="rotate-[-45deg] text-[10px] sm:text-xs font-semibold">
+                  BACK
+                </span>
               </div>
               <div className="group hidden md:flex flex-row relative justify-center items-center">
                 <div className="w-12 h-12 flex justify-center border border-[#1A1B1C] rotate-45 scale-[0.85] group-hover:scale-[0.92] ease duration-300"></div>
-                <span className="absolute left-[15px] bottom-[13px] scale-[0.9] rotate-180 group-hover:scale-[0.92] ease duration-300">▶</span>
+                <span className="absolute left-[15px] bottom-[13px] scale-[0.9] rotate-180 group-hover:scale-[0.92] ease duration-300">
+                  ▶
+                </span>
                 <span className="text-sm font-semibold ml-6">BACK</span>
               </div>
             </div>
@@ -505,19 +601,23 @@ const Demographics = () => {
           <button onClick={() => navigate("/")}>
             <div>
               <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center border border-[#1A1B1C] rotate-45 md:hidden">
-                <span className="rotate-[-45deg] text-[10px] sm:text-xs font-semibold">HOME</span>
+                <span className="rotate-[-45deg] text-[10px] sm:text-xs font-semibold">
+                  HOME
+                </span>
               </div>
               <div className="hidden md:flex flex-row relative justify-center items-center">
                 <span className="text-sm font-semibold mr-5">HOME</span>
                 <div className="w-12 h-12 flex justify-center border border-[#1A1B1C] rotate-45 scale-[0.85]"></div>
-                <span className="absolute right-[15px] bottom-[13px] scale-[0.9]">▶</span>
+                <span className="absolute right-[15px] bottom-[13px] scale-[0.9]">
+                  ▶
+                </span>
               </div>
             </div>
           </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Demographics
+export default Demographics;
