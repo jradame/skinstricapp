@@ -83,7 +83,7 @@ const Hero = () => {
           </div>
 
           {/* Desktop paragraph */}
-          <div className="hidden lg:block fixed bottom-[calc(-7vh)] left-[calc(-20vw)] xl:left-[calc(-27vw)] 2xl:left-[calc(-31vw)] [@media(width>=1920px)]:left-[calc(-33vw)] font-normal text-sm space-y-3 uppercase">
+          <div className="hidden lg:block fixed bottom-[calc(-2vh)] left-[calc(-20vw)] xl:left-[calc(-27vw)] 2xl:left-[calc(-25vw)] [@media(width>=1920px)]:left-[calc(-33vw)] font-normal text-sm space-y-3 uppercase">
             <p>
               Skinstric developed an A.I. that creates a <br />
               highly-personalized routine tailored to <br />
